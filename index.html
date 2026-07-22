@@ -3,69 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title data-i18n="pageTitle">הורדת האפליקציה</title>
+<title data-i18n="pageTitle">מערת טאבון — AR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;600;700&family=Noto+Serif+Hebrew:wght@500;600;700&family=Noto+Sans:wght@400;500;600&family=Noto+Sans+Hebrew:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600&family=Noto+Serif+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0f1720;
-    --card: #16202b;
-    --accent: #3ddc84;
-    --accent-dark: #2bb968;
-    --text: #eaf2ee;
-    --muted: #9fb3ac;
+    --bg-deep: #14100c;
+    --bg-mid: #241a12;
+    --rock: #2f2318;
+    --stone: #cda875;
+    --ember: #d9642c;
+    --ember-dark: #b84f20;
+    --moss: #7a9a63;
+    --text: #f2e8d5;
+    --muted: #ab9c85;
+    --line: rgba(205,168,117,0.18);
   }
   * { box-sizing: border-box; }
+  html, body{ margin:0; padding:0; }
   body{
-    margin:0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(180deg, var(--bg), #0a1016);
+    font-family: "Noto Sans", "Noto Sans Hebrew", "Noto Sans Arabic", sans-serif;
+    background: var(--bg-deep);
     color: var(--text);
     min-height:100vh;
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding: 24px 16px 60px;
+    position: relative;
+    overflow-x:hidden;
+  }
+  /* strata layer lines - archaeological signature */
+  .strata{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 18%, var(--line) 18.5%, transparent 19%,
+      transparent 39%, var(--line) 39.5%, transparent 40%,
+      transparent 63%, var(--line) 63.5%, transparent 64%,
+      transparent 85%, var(--line) 85.5%, transparent 86%);
+  }
+  .hero{
+    width:100%;
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 22px 16px 10px;
+    background: radial-gradient(ellipse 120% 90% at 50% 0%, #3a2a1a 0%, var(--bg-mid) 55%, var(--bg-deep) 100%);
   }
   .lang-switch{
     display:flex;
     gap:8px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     flex-wrap: wrap;
     justify-content:center;
   }
   .lang-switch button{
-    background: var(--card);
+    background: rgba(0,0,0,0.25);
     color: var(--muted);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid var(--line);
     border-radius: 999px;
-    padding: 7px 16px;
-    font-size: 0.85rem;
-    font-weight:600;
+    padding: 6px 15px;
+    font-size: 0.8rem;
+    font-weight:500;
+    font-family: inherit;
     cursor:pointer;
     transition: all .15s ease;
   }
   .lang-switch button.active{
-    background: var(--accent);
-    color:#08210f;
-    border-color: var(--accent);
+    background: var(--ember);
+    color:#1a0f06;
+    border-color: var(--ember);
+    font-weight:600;
   }
-  .logo-badge{
-    width:72px;height:72px;border-radius:20px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    display:flex;align-items:center;justify-content:center;
-    font-size:32px; margin-top:4px; margin-bottom:18px;
-    box-shadow: 0 10px 30px rgba(61,220,132,0.25);
+  .cave-art{
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    margin-bottom: 6px;
+  }
+  .eyebrow{
+    color: var(--moss);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight:600;
   }
   h1{
-    font-size: 1.6rem;
+    font-family: "Noto Serif", "Noto Serif Hebrew", "Noto Serif Arabic", serif;
+    font-size: 2rem;
     text-align:center;
-    margin: 0 0 6px;
+    margin: 0 0 10px;
+    color: var(--text);
+    letter-spacing: 0.01em;
   }
   p.subtitle{
     color: var(--muted);
     text-align:center;
-    margin:0 0 28px;
-    max-width: 480px;
-    line-height:1.5;
+    margin:0 0 26px;
+    max-width: 460px;
+    line-height:1.6;
+    font-size: 0.95rem;
+    padding: 0 8px;
   }
   .download-btn{
     display:flex;
@@ -73,73 +116,89 @@
     justify-content:center;
     gap:10px;
     width:100%;
-    max-width: 360px;
-    background: var(--accent);
-    color:#08210f;
+    max-width: 340px;
+    background: linear-gradient(180deg, var(--ember), var(--ember-dark));
+    color:#1a0f06;
     font-weight:700;
-    font-size:1.1rem;
-    padding: 16px 20px;
+    font-size:1.05rem;
+    padding: 15px 20px;
     border:none;
-    border-radius: 14px;
+    border-radius: 10px;
     text-decoration:none;
-    box-shadow: 0 8px 24px rgba(61,220,132,0.35);
+    box-shadow: 0 8px 26px rgba(217,100,44,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
     transition: transform .12s ease, box-shadow .12s ease;
   }
   .download-btn:active{
     transform: scale(0.97);
-    box-shadow: 0 4px 14px rgba(61,220,132,0.3);
   }
   .file-info{
     color: var(--muted);
-    font-size:0.85rem;
-    margin-top:10px;
+    font-size:0.8rem;
+    margin-top:12px;
+    margin-bottom: 30px;
     text-align:center;
   }
-  .card{
+  .content{
     width:100%;
     max-width: 480px;
-    background: var(--card);
-    border-radius: 18px;
+    z-index:1;
+    padding: 0 16px 40px;
+  }
+  .card{
+    background: var(--rock);
+    border: 1px solid var(--line);
+    border-radius: 14px;
     padding: 22px 20px;
-    margin-top: 40px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    margin-top: 20px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.35);
   }
   .card h2{
+    font-family: "Noto Serif", "Noto Serif Hebrew", "Noto Serif Arabic", serif;
     font-size:1.05rem;
-    margin: 0 0 14px;
+    margin: 0 0 16px;
+    color: var(--stone);
     display:flex;
     align-items:center;
     gap:8px;
   }
   ol{
     margin:0;
-    padding-inline-start: 22px;
+    padding-inline-start: 20px;
     color: var(--text);
     line-height:1.9;
-    font-size:0.95rem;
+    font-size:0.93rem;
   }
-  ol li{ margin-bottom: 10px; }
-  ol li b{ color: var(--accent); }
+  ol li{ margin-bottom: 12px; }
+  ol li b{ color: var(--ember); font-weight:600; }
   .note{
     margin-top:18px;
-    background: rgba(61,220,132,0.08);
-    border: 1px solid rgba(61,220,132,0.25);
+    background: rgba(122,154,99,0.1);
+    border: 1px solid rgba(122,154,99,0.3);
     border-radius: 10px;
     padding: 12px 14px;
-    font-size:0.85rem;
+    font-size:0.82rem;
     color: var(--muted);
     line-height:1.6;
   }
   footer{
-    margin-top:40px;
-    color:#5b6b66;
-    font-size:0.75rem;
+    z-index:1;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size:0.72rem;
     text-align:center;
+    line-height:1.6;
+    padding: 0 20px 30px;
+  }
+  footer .credit-line{
+    margin-top:4px;
+    opacity:0.8;
   }
 </style>
 </head>
 <body>
+<div class="strata"></div>
 
+<div class="hero">
   <div class="lang-switch" id="langSwitch">
     <button data-lang="he">עברית</button>
     <button data-lang="en">English</button>
@@ -147,96 +206,127 @@
     <button data-lang="de">Deutsch</button>
   </div>
 
-  <div class="logo-badge">📱</div>
-  <h1 data-i18n="title">הורדת האפליקציה</h1>
-  <p class="subtitle" data-i18n="subtitle">לחצו על הכפתור להורדת קובץ ההתקנה (APK) ישירות לטלפון שלכם</p>
+  <svg class="cave-art" viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="rockGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4a3620"/>
+        <stop offset="100%" stop-color="#241a12"/>
+      </linearGradient>
+      <radialGradient id="caveGlow" cx="50%" cy="55%" r="55%">
+        <stop offset="0%" stop-color="#d9642c" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#241a12" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="400" height="220" fill="url(#rockGrad)" opacity="0.0"/>
+    <path d="M0,220 L0,90 Q40,40 90,60 Q140,20 200,10 Q260,20 310,60 Q360,40 400,90 L400,220 Z" fill="#3a2a1a" opacity="0.9"/>
+    <path d="M60,220 L60,110 Q120,55 200,60 Q280,55 340,110 L340,220 Z" fill="#241a12"/>
+    <ellipse cx="200" cy="150" rx="130" ry="55" fill="url(#caveGlow)"/>
+    <path d="M110,220 L110,140 Q150,95 200,100 Q250,95 290,140 L290,220 Z" fill="#14100c"/>
+  </svg>
+
+  <div class="eyebrow" data-i18n="eyebrow">Nahal Me'arot · Mount Carmel</div>
+  <h1 data-i18n="title">מערת טאבון — AR</h1>
+  <p class="subtitle" data-i18n="subtitle">התקינו את האפליקציה כדי לחוות מחדש 500,000 שנות היסטוריה — שכבה אחר שכבה, ישירות מעל האתר האמיתי.</p>
 
   <a href="app.apk" download class="download-btn">
-    <span>⬇</span><span data-i18n="downloadBtn">הורדת האפליקציה</span>
+    <span>⛏</span><span data-i18n="downloadBtn">הורדת האפליקציה</span>
   </a>
   <div class="file-info" data-i18n="fileInfo">קובץ APK · מיועד למכשירי אנדרואיד</div>
+</div>
 
+<div class="content">
   <div class="card">
-    <h2><span>🔧</span> <span data-i18n="howToTitle">איך מתקינים את הקובץ בטלפון</span></h2>
-    <ol id="stepsList">
+    <h2><span>🔥</span> <span data-i18n="howToTitle">איך מתקינים על הטלפון</span></h2>
+    <ol>
       <li data-i18n="step1">לאחר ההורדה, פתחו את <b>ההתראה</b> או היכנסו לתיקיית <b>הורדות (Downloads)</b> בטלפון.</li>
       <li data-i18n="step2">הקישו על הקובץ שהתקבל (עם הסיומת <b>.apk</b>).</li>
-      <li data-i18n="step3">אם מופיעה הודעה שחוסמת התקנה, היכנסו ל<b>הגדרות</b> ואשרו התקנה ממקור זה (המערכת תפנה אתכם לזה אוטומטית).</li>
+      <li data-i18n="step3">אם מופיעה הודעה שחוסמת התקנה, היכנסו ל<b>הגדרות</b> ואשרו התקנה ממקור זה.</li>
       <li data-i18n="step4">לחצו <b>התקן</b> והמתינו לסיום ההתקנה.</li>
-      <li data-i18n="step5">לחצו <b>פתח</b> — האפליקציה תופיע כעת גם במסך הבית, בדיוק כמו כל אפליקציה אחרת.</li>
+      <li data-i18n="step5">לחצו <b>פתח</b> — עמדו מול מערת טאבון וסרקו את קוד ה-QR באתר כדי להתחיל.</li>
     </ol>
     <div class="note" data-i18n="note">
-      💡 הערה: התקנה מחוץ ל-Google Play דורשת אישור חד-פעמי של המערכת ("מקורות לא מוכרים"). זהו תהליך תקין ובטוח כאשר הקובץ מגיע ממקור מהימן.
+      💡 הערה: התקנה מחוץ ל-Google Play דורשת אישור חד-פעמי של המערכת ("מקורות לא מוכרים"). זהו תהליך תקין ובטוח.
     </div>
   </div>
+</div>
 
-  <footer data-i18n="footer">&copy; 2026 — כל הזכויות שמורות</footer>
+<footer>
+  <div data-i18n="footer">TABUN CAVE AR</div>
+</footer>
 
 <script>
 const translations = {
   he: {
     dir: "rtl",
-    pageTitle: "הורדת האפליקציה",
-    title: "הורדת האפליקציה",
-    subtitle: "לחצו על הכפתור להורדת קובץ ההתקנה (APK) ישירות לטלפון שלכם",
+    pageTitle: "מערת טאבון — AR",
+    eyebrow: "נחל מערות · הר הכרמל",
+    title: "מערת טאבון — AR",
+    subtitle: "התקינו את האפליקציה כדי לחוות מחדש 500,000 שנות היסטוריה — שכבה אחר שכבה, ישירות מעל האתר האמיתי.",
     downloadBtn: "הורדת האפליקציה",
     fileInfo: "קובץ APK · מיועד למכשירי אנדרואיד",
-    howToTitle: "איך מתקינים את הקובץ בטלפון",
+    howToTitle: "איך מתקינים על הטלפון",
     step1: "לאחר ההורדה, פתחו את <b>ההתראה</b> או היכנסו לתיקיית <b>הורדות (Downloads)</b> בטלפון.",
     step2: "הקישו על הקובץ שהתקבל (עם הסיומת <b>.apk</b>).",
-    step3: "אם מופיעה הודעה שחוסמת התקנה, היכנסו ל<b>הגדרות</b> ואשרו התקנה ממקור זה (המערכת תפנה אתכם לזה אוטומטית).",
+    step3: "אם מופיעה הודעה שחוסמת התקנה, היכנסו ל<b>הגדרות</b> ואשרו התקנה ממקור זה.",
     step4: "לחצו <b>התקן</b> והמתינו לסיום ההתקנה.",
-    step5: "לחצו <b>פתח</b> — האפליקציה תופיע כעת גם במסך הבית, בדיוק כמו כל אפליקציה אחרת.",
-    note: '💡 הערה: התקנה מחוץ ל-Google Play דורשת אישור חד-פעמי של המערכת ("מקורות לא מוכרים"). זהו תהליך תקין ובטוח כאשר הקובץ מגיע ממקור מהימן.',
-    footer: "&copy; 2026 — כל הזכויות שמורות"
+    step5: "לחצו <b>פתח</b> — עמדו מול מערת טאבון וסרקו את קוד ה-QR באתר כדי להתחיל.",
+    note: '💡 הערה: התקנה מחוץ ל-Google Play דורשת אישור חד-פעמי של המערכת ("מקורות לא מוכרים"). זהו תהליך תקין ובטוח.', layer3: "אשלית",
+    footer: "TABUN CAVE AR",
+    credit: "הלה חילו · באסל יאסין · דנה נמרני — אוניברסיטת חיפה"
   },
   en: {
     dir: "ltr",
-    pageTitle: "Download the App",
-    title: "Download the App",
-    subtitle: "Tap the button below to download the installation file (APK) directly to your phone",
-    downloadBtn: "Download App",
+    pageTitle: "Tabun Cave — AR",
+    eyebrow: "Nahal Me'arot · Mount Carmel",
+    title: "Tabun Cave — AR",
+    subtitle: "Install the app to relive 500,000 years of history — layer by layer, right on top of the real site.",
+    downloadBtn: "Download the App",
     fileInfo: "APK file · For Android devices",
-    howToTitle: "How to install the file on your phone",
+    howToTitle: "How to install on your phone",
     step1: "After downloading, open the <b>notification</b> or go to the <b>Downloads</b> folder on your phone.",
     step2: "Tap the downloaded file (with the <b>.apk</b> extension).",
-    step3: "If a message blocks the installation, go to <b>Settings</b> and allow installs from this source (the system will guide you there automatically).",
+    step3: "If a message blocks the installation, go to <b>Settings</b> and allow installs from this source.",
     step4: "Tap <b>Install</b> and wait for it to finish.",
-    step5: "Tap <b>Open</b> — the app will now also appear on your home screen, just like any other app.",
-    note: '💡 Note: Installing outside Google Play requires a one-time system approval ("unknown sources"). This is a normal and safe process when the file comes from a trusted source.',
-    footer: "&copy; 2026 — All rights reserved"
+    step5: "Tap <b>Open</b> — stand facing Tabun Cave and scan the on-site QR code to begin.",
+    note: '💡 Note: Installing outside Google Play requires a one-time system approval ("unknown sources"). This is normal and safe.', layer3: "Acheulean",
+    footer: "TABUN CAVE AR",
+    credit: "Hala Hillou · Basil Yassin · Dana Nmarny — University of Haifa"
   },
   ar: {
     dir: "rtl",
-    pageTitle: "تحميل التطبيق",
-    title: "تحميل التطبيق",
-    subtitle: "اضغط على الزر لتحميل ملف التثبيت (APK) مباشرة إلى هاتفك",
+    pageTitle: "مغارة الطابون — AR",
+    eyebrow: "وادي المغارة · جبل الكرمل",
+    title: "مغارة الطابون — AR",
+    subtitle: "ثبّت التطبيق لتعيش 500,000 عام من التاريخ من جديد — طبقة تلو طبقة، فوق الموقع الحقيقي مباشرة.",
     downloadBtn: "تحميل التطبيق",
     fileInfo: "ملف APK · مخصص لأجهزة أندرويد",
-    howToTitle: "كيفية تثبيت الملف على الهاتف",
-    step1: "بعد التحميل، افتح <b>الإشعار</b> أو انتقل إلى مجلد <b>التنزيلات (Downloads)</b> في هاتفك.",
+    howToTitle: "كيفية التثبيت على الهاتف",
+    step1: "بعد التحميل، افتح <b>الإشعار</b> أو انتقل إلى مجلد <b>التنزيلات</b> في هاتفك.",
     step2: "اضغط على الملف الذي تم تحميله (بامتداد <b>.apk</b>).",
-    step3: "إذا ظهرت رسالة تمنع التثبيت، اذهب إلى <b>الإعدادات</b> ووافق على التثبيت من هذا المصدر (سيوجهك النظام تلقائيًا).",
+    step3: "إذا ظهرت رسالة تمنع التثبيت، اذهب إلى <b>الإعدادات</b> ووافق على التثبيت من هذا المصدر.",
     step4: "اضغط على <b>تثبيت</b> وانتظر حتى ينتهي.",
-    step5: "اضغط على <b>فتح</b> — سيظهر التطبيق الآن أيضًا على الشاشة الرئيسية، تمامًا مثل أي تطبيق آخر.",
-    note: '💡 ملاحظة: التثبيت من خارج Google Play يتطلب موافقة لمرة واحدة من النظام ("مصادر غير معروفة"). هذه عملية طبيعية وآمنة عندما يأتي الملف من مصدر موثوق.',
-    footer: "&copy; 2026 — جميع الحقوق محفوظة"
+    step5: "اضغط على <b>فتح</b> — قف أمام مغارة الطابون وامسح رمز QR في الموقع للبدء.",
+    note: '💡 ملاحظة: التثبيت من خارج Google Play يتطلب موافقة لمرة واحدة ("مصادر غير معروفة"). هذه عملية طبيعية وآمنة.', layer3: "الأشولية",
+    footer: "TABUN CAVE AR",
+    credit: "هلا حلو · باسل ياسين · دانا نمراني — جامعة حيفا"
   },
   de: {
     dir: "ltr",
-    pageTitle: "App herunterladen",
-    title: "App herunterladen",
-    subtitle: "Tippen Sie auf die Schaltfläche, um die Installationsdatei (APK) direkt auf Ihr Telefon herunterzuladen",
+    pageTitle: "Tabun-Höhle — AR",
+    eyebrow: "Nahal Me'arot · Karmelgebirge",
+    title: "Tabun-Höhle — AR",
+    subtitle: "Installieren Sie die App, um 500.000 Jahre Geschichte neu zu erleben — Schicht für Schicht, direkt über dem echten Fundort.",
     downloadBtn: "App herunterladen",
     fileInfo: "APK-Datei · Für Android-Geräte",
-    howToTitle: "So installieren Sie die Datei auf Ihrem Telefon",
+    howToTitle: "So installieren Sie die App",
     step1: "Öffnen Sie nach dem Download die <b>Benachrichtigung</b> oder gehen Sie zum Ordner <b>Downloads</b> auf Ihrem Telefon.",
     step2: "Tippen Sie auf die heruntergeladene Datei (mit der Endung <b>.apk</b>).",
-    step3: "Falls eine Meldung die Installation blockiert, gehen Sie zu <b>Einstellungen</b> und erlauben Sie Installationen aus dieser Quelle (das System leitet Sie automatisch dorthin).",
+    step3: "Falls eine Meldung die Installation blockiert, gehen Sie zu <b>Einstellungen</b> und erlauben Sie Installationen aus dieser Quelle.",
     step4: "Tippen Sie auf <b>Installieren</b> und warten Sie, bis der Vorgang abgeschlossen ist.",
-    step5: "Tippen Sie auf <b>Öffnen</b> — die App erscheint nun auch auf Ihrem Startbildschirm, genau wie jede andere App.",
-    note: '💡 Hinweis: Die Installation außerhalb von Google Play erfordert eine einmalige Systemfreigabe ("unbekannte Quellen"). Das ist ein normaler und sicherer Vorgang, wenn die Datei aus einer vertrauenswürdigen Quelle stammt.',
-    footer: "&copy; 2026 — Alle Rechte vorbehalten"
+    step5: "Tippen Sie auf <b>Öffnen</b> — stellen Sie sich vor die Tabun-Höhle und scannen Sie den QR-Code vor Ort.",
+    note: '💡 Hinweis: Die Installation außerhalb von Google Play erfordert eine einmalige Systemfreigabe ("unbekannte Quellen"). Das ist normal und sicher.', layer3: "Acheuléen",
+    footer: "TABUN CAVE AR",
+    credit: "Hala Hillou · Basil Yassin · Dana Nmarny — Universität Haifa"
   }
 };
 
